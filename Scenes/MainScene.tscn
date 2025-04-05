@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0frf72gbqy8u"]
+
+[ext_resource type="Script" uid="uid://c45a68pid2j3x" path="res://Scripts/WindowsManager.gd" id="1_tr2i4"]
+
+[node name="MainScene" type="Node2D"]
+
+[node name="WindowsManager" type="Node" parent="."]
+script = ExtResource("1_tr2i4")
