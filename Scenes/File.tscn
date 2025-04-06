@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdn65xf60ic24"]
+
+[ext_resource type="Script" uid="uid://dfsjuee6nxsra" path="res://Scripts/File.gd" id="1_wvf65"]
+[ext_resource type="Texture2D" uid="uid://dhnygvqgx1k7q" path="res://Assets/file.png" id="2_bb4b2"]
+[ext_resource type="FontFile" uid="uid://dy2pqiwq5k0rt" path="res://Assets/Kenney Mini Square.ttf" id="3_omfu5"]
+
+[node name="File" type="Node2D"]
+script = ExtResource("1_wvf65")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 52.0
+offset_bottom = 42.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_bb4b2")
+stretch_mode = 2
+
+[node name="Filename" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_omfu5")
+theme_override_font_sizes/font_size = 8
+text = "name of the file"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="gui_input" from="VBoxContainer" to="." method="_on_gui_input"]
