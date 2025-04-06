@@ -1,5 +1,7 @@
 extends Node
 
 func _ready() -> void:
-	get_window().content_scale_size = get_window().size / 2
+	if OS.get_name() == "Windows" || OS.get_name() == "Linux":
+		get_window().size *= 2
+		get_window().move_to_center()
 	$File.init("game folder", true)

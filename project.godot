@@ -13,12 +13,15 @@ config_version=5
 config/name="One More Folder"
 run/main_scene="uid://c0frf72gbqy8u"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=1088
-window/size/viewport_height=612
+window/size/viewport_width=544
+window/size/viewport_height=306
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
