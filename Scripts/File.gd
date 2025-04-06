@@ -9,10 +9,11 @@ func init(filename: String, folder: bool) -> void:
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		if event.double_click:
-			$"../WindowsManager".open_window()
-		elif event.pressed:
-			$"../WindowsManager".select_file(self)
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.double_click:
+				$"/root/MainScene/WindowsManager".open_window()
+			elif event.pressed:
+				$"/root/MainScene/WindowsManager".select_file(self)
 
 func was_selected() -> void:
 	if is_folder:
@@ -25,3 +26,6 @@ func was_deselected() -> void:
 		$VBoxContainer/Icon.texture = load("res://Assets/folder.png")
 	else:
 		$VBoxContainer/Icon.texture = load("res://Assets/file.png")
+
+func get_size_in_pixels() -> Vector2i:
+	return $VBoxContainer.size

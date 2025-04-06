@@ -4,7 +4,11 @@ var window_scene = preload("res://Scenes/Window.tscn")
 var windows = []
 var selected_file: Node2D = null
 
-func _input(event) -> void:
+func _unhandled_input(event) -> void:
+	if event is InputEventKey:
+		if !event.pressed && event.physical_keycode == KEY_ESCAPE:
+			if windows.size() > 0:
+				close_window(windows[0])
 	if event is InputEventMouseButton:
 		for window: Node2D in windows:
 			if window.handle_mouse_button(event):
@@ -15,8 +19,8 @@ func _input(event) -> void:
 				break
 
 func open_window() -> void:
+	$"../OpenSoundPlayer".play()
 	var window: Node2D = window_scene.instantiate()
-	window.init(self, 12, 8)
 	window.set_title("Super fenêtre")
 	add_child(window)
 	window.position = floor(get_viewport().get_mouse_position() - window.size_in_pixels / 2)
@@ -44,6 +48,7 @@ func update_z_indexes() -> void:
 		z_index -= 10
 
 func close_window(window: Node2D) -> void:
+	$"../CloseSoundPlayer".play()
 	unselect_current_file()
 	var index = windows.find(window)
 	windows.remove_at(index)

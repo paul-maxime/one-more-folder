@@ -11,6 +11,7 @@ script = ExtResource("1_808q2")
 z_index = -1
 offset_right = 32.0
 offset_bottom = 32.0
+mouse_filter = 1
 
 [node name="WindowTitle" type="Label" parent="."]
 offset_left = 4.0

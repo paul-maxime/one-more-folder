@@ -1,34 +1,81 @@
 extends Node2D
 
+var file_scene = preload("res://Scenes/File.tscn")
+
 var windows_manager: Node
-var size_in_chunks: Vector2i
 var size_in_pixels: Vector2
 var is_dragging = false
 var is_dragging_from: Vector2
 var is_dragging_from_mouse_pos: Vector2
 var pressed_close = false
 
+var last_created_file: Node2D = null
+var next_file_new_line: bool = false
+var minimum_window_size: Vector2i = Vector2i.ZERO
+
 func _ready() -> void:
+	windows_manager = $"/root/MainScene/WindowsManager";
+
+	create_file("un fichier")
+	create_file("un fichier")
+	create_file("un fichier")
+	goto_next_line()
+	create_file("un fichier")
+	create_file("un fichier plus long")
+	create_file("un fichier")
+	goto_next_line()
+	create_file("un fichier")
+	goto_next_line()
+	create_file("un fichier")
+	create_folder("un super dossier")
+
+	#if size_in_pixels.x < 180: size_in_pixels.x = 180
+	#if size_in_pixels.y < 80: size_in_pixels.y = 80
+
+	$CloseButton.position = Vector2(size_in_pixels.x - 16, 0)
+	$Background.size = size_in_pixels
 	spawn_window_elements()
 
-func init(manager: Node, size_x: int, size_y: int) -> void:
-	windows_manager = manager
-	size_in_chunks = Vector2i(size_x, size_y)
-	size_in_pixels = Vector2(size_x * 16, size_y * 16)
+func create_file(filename: String) -> void:
+	var file: Node2D = file_scene.instantiate()
+	file.init(filename, false)
+	add_file(file)
+
+func create_folder(filename: String) -> void:
+	var file: Node2D = file_scene.instantiate()
+	file.init(filename, true)
+	add_file(file)
+
+func goto_next_line() -> void:
+	next_file_new_line = true
+
+func add_file(file: Node2D) -> void:
+	add_child(file)
+	file.z_index = 1
+	file.position = Vector2i(8, 16 + 8)
+	if last_created_file != null:
+		if next_file_new_line:
+			file.position = Vector2i(8, last_created_file.position.y + last_created_file.get_size_in_pixels().y + 8)
+		else:
+			file.position = Vector2i(last_created_file.position) + Vector2i(last_created_file.get_size_in_pixels().x + 8, 0)
+	next_file_new_line = false
+	last_created_file = file
+	var expected_window_size = Vector2i(file.position) + file.get_size_in_pixels() + Vector2i(8, 8)
+	size_in_pixels.x = max(size_in_pixels.x, expected_window_size.x)
+	size_in_pixels.y = max(size_in_pixels.y, expected_window_size.y)
 
 func spawn_window_elements() -> void:
-	var size_x = size_in_chunks.x
-	var size_y = size_in_chunks.y
-	$CloseButton.position = Vector2(size_x * 16 - 16, 0)
-	$Background.size = Vector2(size_x * 16, size_y * 16)
-	for x in range(size_x):
-		for y in range(size_y):
+	var chunk_size = Vector2i(ceil(size_in_pixels / 16))
+	var final_delta = chunk_size * 16 - Vector2i(size_in_pixels)
+
+	for x in range(chunk_size.x):
+		for y in range(chunk_size.y):
 			var texture = null
 			if y == 0:
 				# header
 				if x == 0:
 					texture = "header-left"
-				elif x == size_x - 1:
+				elif x == chunk_size.x - 1:
 					texture = "header-right"
 				else:
 					texture = "header-middle"
@@ -36,15 +83,15 @@ func spawn_window_elements() -> void:
 				# top
 				if x == 0:
 					texture = "ui-top-left"
-				elif x == size_x - 1:
+				elif x == chunk_size.x - 1:
 					texture = "ui-top-right"
 				else:
 					texture = "ui-top"
-			elif y == size_y - 1:
+			elif y == chunk_size.y - 1:
 				# bottom
 				if x == 0:
 					texture = "ui-bottom-left"
-				elif x == size_x - 1:
+				elif x == chunk_size.x - 1:
 					texture = "ui-bottom-right"
 				else:
 					texture = "ui-bottom"
@@ -52,13 +99,19 @@ func spawn_window_elements() -> void:
 				# center
 				if x == 0:
 					texture = "ui-left"
-				elif x == size_x - 1:
+				elif x == chunk_size.x - 1:
 					texture = "ui-right"
+
+			var delta = Vector2.ZERO
+			if x == chunk_size.x - 1:
+				delta.x -= final_delta.x
+			if y == chunk_size.y - 1:
+				delta.y -= final_delta.y
 
 			if texture != null:
 				var sprite = Sprite2D.new()
 				sprite.texture = load("res://Assets/" + texture + ".png")
-				sprite.position = Vector2(x * 16, y * 16)
+				sprite.position = Vector2(x * 16, y * 16) + delta
 				sprite.centered = false
 				sprite.z_index = -1
 				add_child(sprite)
