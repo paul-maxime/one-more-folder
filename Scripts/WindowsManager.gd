@@ -4,26 +4,6 @@ var window_scene = preload("res://Scenes/Window.tscn")
 var windows = []
 var selected_file: Node2D = null
 
-func _ready() -> void:
-	# var window: Node2D = window_scene.instantiate()
-	# window.init(self, 12, 8)
-	# window.set_title("Super fenêtre")
-	# add_child(window)
-	# var window2: Node2D = window_scene.instantiate()
-	# window2.init(self, 10, 8)
-	# window2.set_title("La fenêtre 2")
-	# window2.position = Vector2(62, 14)
-	# add_child(window2)
-	# var window3: Node2D = window_scene.instantiate()
-	# window3.init(self, 14, 8)
-	# window3.set_title("La fameuse et dernière 3e window")
-	# window3.position = Vector2(32, 54)
-	# add_child(window3)
-	# windows.append(window3)
-	# windows.append(window2)
-	# windows.append(window)
-	update_z_indexes()
-
 func _input(event) -> void:
 	if event is InputEventMouseButton:
 		for window: Node2D in windows:
@@ -38,8 +18,9 @@ func open_window() -> void:
 	var window: Node2D = window_scene.instantiate()
 	window.init(self, 12, 8)
 	window.set_title("Super fenêtre")
-	window.position = Vector2(62, 14)
 	add_child(window)
+	window.position = floor(get_viewport().get_mouse_position() - window.size_in_pixels / 2)
+	window.clamp_position()
 	windows.push_front(window)
 	update_z_indexes()
 	unselect_current_file()

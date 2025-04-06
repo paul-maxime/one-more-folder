@@ -102,11 +102,14 @@ func handle_mouse_motion(event: InputEventMouseMotion) -> bool:
 			$Background.mouse_default_cursor_shape = Input.CURSOR_ARROW
 	if is_dragging:
 		position = floor(is_dragging_from + event.position - is_dragging_from_mouse_pos)
-		if position.x < 0: position.x = 0
-		if position.y < 0: position.y = 0
-		if position.x + size_in_pixels.x >= get_viewport_rect().end.x: position.x = get_viewport_rect().end.x - size_in_pixels.x
-		if position.y + size_in_pixels.y >= get_viewport_rect().end.y: position.y = get_viewport_rect().end.y - size_in_pixels.y
+		clamp_position()
 	return true
+
+func clamp_position() -> void:
+	if position.x < 0: position.x = 0
+	if position.y < 0: position.y = 0
+	if position.x + size_in_pixels.x >= get_viewport_rect().end.x: position.x = get_viewport_rect().end.x - size_in_pixels.x
+	if position.y + size_in_pixels.y >= get_viewport_rect().end.y: position.y = get_viewport_rect().end.y - size_in_pixels.y
 
 func is_position_part_of_window(event_position: Vector2) -> bool:
 	return event_position.x >= position.x && \
