@@ -1,5 +1,7 @@
 extends Node
 
+var victory_scene = preload("res://Scenes/VictoryScreen.tscn")
+
 func _ready() -> void:
 	if OS.get_name() == "Windows" || OS.get_name() == "Linux":
 		get_window().size *= 2
@@ -35,6 +37,9 @@ func open_file(filename: String) -> void:
 		var window = $WindowsManager.create_window(filename)
 		window.finalize_window()
 		$WindowsManager.open_window(window)
+	elif filename == "data":
+		add_child(victory_scene.instantiate())
+		$OpenSoundPlayer.play()
 	else:
 		$CannotOpenSoundPlayer.play()
 		$WindowsManager.unselect_current_file()

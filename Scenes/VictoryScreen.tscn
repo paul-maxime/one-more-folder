@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://2fmi0i3pgv45"]
+
+[ext_resource type="Script" uid="uid://clps2cmvd3bml" path="res://Scripts/VictoryScreen.gd" id="1_2n4xq"]
+[ext_resource type="Script" uid="uid://bcvjougs76l4c" path="res://Scripts/MovingFilesSpawner.gd" id="2_8kq2x"]
+[ext_resource type="FontFile" uid="uid://dy2pqiwq5k0rt" path="res://Assets/Kenney Mini Square.ttf" id="2_rc3hl"]
+[ext_resource type="AudioStream" uid="uid://wqqgbeujyee1" path="res://Assets/Audio/close_004.ogg" id="4_j7jqh"]
+[ext_resource type="AudioStream" uid="uid://duws1sg2dpvdn" path="res://Assets/Audio/error_007.ogg" id="5_fjces"]
+
+[node name="VictoryScreen" type="Node"]
+script = ExtResource("1_2n4xq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 1000
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0)
+
+[node name="MovingFilesSpawner" type="Node2D" parent="."]
+visible = false
+z_index = 1005
+script = ExtResource("2_8kq2x")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
+layout_mode = 2
+
+[node name="LoadingLabel" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_rc3hl")
+text = "Loading..."
+horizontal_alignment = 1
+
+[node name="LoadingProgress" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_rc3hl")
+text = "■□□□□□□□□□"
+horizontal_alignment = 1
+
+[node name="ShotSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_j7jqh")
+volume_db = -5.0
+
+[node name="DestroyedSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fjces")
+volume_db = -8.0

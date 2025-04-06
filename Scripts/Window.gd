@@ -27,7 +27,6 @@ func create_folder(filename: String) -> void:
 	add_file(file)
 
 func finalize_window() -> void:
-	print(size_in_pixels)
 	if size_in_pixels.x < 120: size_in_pixels.x = 120
 	if size_in_pixels.y < 74: size_in_pixels.y = 74
 	$CloseButton.position = Vector2(size_in_pixels.x - 16, 0)

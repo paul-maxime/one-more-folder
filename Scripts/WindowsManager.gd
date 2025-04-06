@@ -42,13 +42,13 @@ func focus_window(window: Node2D) -> void:
 	unselect_current_file()
 
 func update_z_indexes() -> void:
-	var z_index = windows.size() * 10
+	var z_index = windows.size() * 5
 	var index = windows.size() - 1
 	for window: Node2D in windows:
 		move_child(window, index)
 		window.z_index = z_index
 		index -= 1
-		z_index -= 10
+		z_index -= 5
 
 func close_window(window: Node2D) -> void:
 	$"../CloseSoundPlayer".play()
