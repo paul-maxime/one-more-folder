@@ -18,11 +18,14 @@ func _unhandled_input(event) -> void:
 			if window.handle_mouse_motion(event):
 				break
 
-func open_window() -> void:
-	$"../OpenSoundPlayer".play()
+func create_window(title: String) -> Node2D:
 	var window: Node2D = window_scene.instantiate()
-	window.set_title("Super fenêtre")
+	window.set_title(title)
 	add_child(window)
+	return window
+
+func open_window(window: Node2D) -> void:
+	$"../OpenSoundPlayer".play()
 	window.position = floor(get_viewport().get_mouse_position() - window.size_in_pixels / 2)
 	window.clamp_position()
 	windows.push_front(window)

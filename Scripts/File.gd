@@ -11,7 +11,7 @@ func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.double_click:
-				$"/root/MainScene/WindowsManager".open_window()
+				$"/root/MainScene".open_file($VBoxContainer/Filename.text)
 			elif event.pressed:
 				$"/root/MainScene/WindowsManager".select_file(self)
 

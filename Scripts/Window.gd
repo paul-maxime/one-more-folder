@@ -16,26 +16,6 @@ var minimum_window_size: Vector2i = Vector2i.ZERO
 func _ready() -> void:
 	windows_manager = $"/root/MainScene/WindowsManager";
 
-	create_file("un fichier")
-	create_file("un fichier")
-	create_file("un fichier")
-	goto_next_line()
-	create_file("un fichier")
-	create_file("un fichier plus long")
-	create_file("un fichier")
-	goto_next_line()
-	create_file("un fichier")
-	goto_next_line()
-	create_file("un fichier")
-	create_folder("un super dossier")
-
-	#if size_in_pixels.x < 180: size_in_pixels.x = 180
-	#if size_in_pixels.y < 80: size_in_pixels.y = 80
-
-	$CloseButton.position = Vector2(size_in_pixels.x - 16, 0)
-	$Background.size = size_in_pixels
-	spawn_window_elements()
-
 func create_file(filename: String) -> void:
 	var file: Node2D = file_scene.instantiate()
 	file.init(filename, false)
@@ -45,6 +25,14 @@ func create_folder(filename: String) -> void:
 	var file: Node2D = file_scene.instantiate()
 	file.init(filename, true)
 	add_file(file)
+
+func finalize_window() -> void:
+	print(size_in_pixels)
+	if size_in_pixels.x < 120: size_in_pixels.x = 120
+	if size_in_pixels.y < 74: size_in_pixels.y = 74
+	$CloseButton.position = Vector2(size_in_pixels.x - 16, 0)
+	$Background.size = size_in_pixels
+	spawn_window_elements()
 
 func goto_next_line() -> void:
 	next_file_new_line = true
@@ -177,4 +165,4 @@ func is_position_close_button(event_position: Vector2) -> bool:
 		event_position.y <= $CloseButton.global_position.y + 14
 
 func set_title(text: String) -> void:
-	$WindowTitle.text = text
+	$WindowTitle.text = text.replace("\n", " ")

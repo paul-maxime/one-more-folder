@@ -28,9 +28,11 @@ size_flags_horizontal = 4
 mouse_filter = 0
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
 theme_override_fonts/font = ExtResource("3_omfu5")
 theme_override_font_sizes/font_size = 8
 text = "name of the file"
+horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [connection signal="gui_input" from="VBoxContainer/Icon" to="." method="_on_gui_input"]
