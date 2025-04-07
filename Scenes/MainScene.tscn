@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0frf72gbqy8u"]
+[gd_scene load_steps=9 format=3 uid="uid://c0frf72gbqy8u"]
 
 [ext_resource type="Script" uid="uid://tntj5l4h835i" path="res://Scripts/MainScene.gd" id="1_qxria"]
 [ext_resource type="Script" uid="uid://c45a68pid2j3x" path="res://Scripts/WindowsManager.gd" id="1_tr2i4"]
@@ -6,16 +6,17 @@
 [ext_resource type="AudioStream" uid="uid://cv7xnxracourj" path="res://Assets/Audio/click_002.ogg" id="4_qxria"]
 [ext_resource type="AudioStream" uid="uid://cqobc5wxky83t" path="res://Assets/Audio/switch_005.ogg" id="4_y4jh7"]
 [ext_resource type="AudioStream" uid="uid://bjqs0mo1vi55u" path="res://Assets/Audio/click_005.ogg" id="5_y4jh7"]
+[ext_resource type="AudioStream" uid="uid://b4e864h0eo558" path="res://Assets/Audio/question_004.ogg" id="6_f140w"]
 [ext_resource type="AudioStream" uid="uid://dvbg1vcwt3lkh" path="res://Assets/Audio/error_006.ogg" id="6_q68mp"]
 
 [node name="MainScene" type="Node"]
 script = ExtResource("1_qxria")
 
 [node name="GameFolder" parent="." instance=ExtResource("2_nhkr4")]
-position = Vector2(144, 120)
+position = Vector2(350, 128)
 
 [node name="SystemFolder" parent="." instance=ExtResource("2_nhkr4")]
-position = Vector2(48, 48)
+position = Vector2(128, 128)
 
 [node name="WindowsManager" type="Node" parent="."]
 script = ExtResource("1_tr2i4")
@@ -27,6 +28,9 @@ stream = ExtResource("4_y4jh7")
 
 [node name="CannotOpenSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_y4jh7")
+
+[node name="SuccessSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_f140w")
 
 [node name="ErrorSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_q68mp")

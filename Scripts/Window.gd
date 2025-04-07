@@ -14,6 +14,7 @@ var next_file_new_line: bool = false
 var minimum_window_size: Vector2i = Vector2i.ZERO
 
 var is_text = false
+var is_success = false
 var is_error = false
 
 func _ready() -> void:
@@ -35,6 +36,11 @@ func display_text(text: String) -> void:
 	$WindowText.show()
 	size_in_pixels = $WindowText.size + $WindowText.position + Vector2(8, 8)
 
+func display_success(text: String) -> void:
+	display_error(text)
+	is_error = false
+	is_success = true
+
 func display_error(text: String) -> void:
 	is_error = true
 	$ErrorText.text = text
@@ -42,7 +48,7 @@ func display_error(text: String) -> void:
 	size_in_pixels = $ErrorText.size + $ErrorText.position + Vector2(8, 8)
 
 func finalize_window() -> void:
-	if !is_error && !is_text:
+	if !is_success && !is_error && !is_text:
 		if size_in_pixels.x < 120: size_in_pixels.x = 120
 		if size_in_pixels.y < 74: size_in_pixels.y = 74
 	$CloseButton.position = Vector2(size_in_pixels.x - 16, 0)

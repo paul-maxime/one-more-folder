@@ -27,6 +27,8 @@ func create_window(title: String) -> Node2D:
 func open_window(window: Node2D) -> void:
 	if window.is_error:
 		$"../ErrorSoundPlayer".play()
+	elif window.is_success:
+		$"../SuccessSoundPlayer".play()
 	else:
 		$"../OpenSoundPlayer".play()
 	window.finalize_window()
