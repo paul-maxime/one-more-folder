@@ -44,7 +44,7 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_rc3hl")
-text = "■□□□□□□□□□"
+text = "#_________"
 horizontal_alignment = 1
 
 [node name="ShotSoundPlayer" type="AudioStreamPlayer" parent="."]

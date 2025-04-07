@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 			elapsed_time -= 0.3
 			progress_count += 1
 			var text: String = $CanvasLayer/CenterContainer/VBoxContainer/LoadingProgress.text
-			text = "■" + text.substr(0, text.length() - 1)
+			text = "#" + text.substr(0, text.length() - 1)
 			$CanvasLayer/CenterContainer/VBoxContainer/LoadingProgress.text = text
 			if progress_count == 10:
 				congratz()
