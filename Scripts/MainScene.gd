@@ -71,6 +71,7 @@ func open_file(filename: String) -> void:
 	elif filename.begins_with("tools_"):
 		var window = $WindowsManager.create_window(filename)
 		window.create_folder(filename.replace("tools_", "drivers_"))
+		window.create_folder(filename.replace("tools_", "plugins_"))
 		$WindowsManager.open_window(window)
 	elif filename.begins_with("drivers_"):
 		var window = $WindowsManager.create_window(filename)
@@ -79,6 +80,17 @@ func open_file(filename: String) -> void:
 		window.goto_next_line()
 		window.create_folder(filename.replace("drivers_", "puntel "))
 		window.create_folder(filename.replace("drivers_", "zvidia "))
+		$WindowsManager.open_window(window)
+	elif filename.begins_with("plugins_"):
+		var window = $WindowsManager.create_window(filename)
+		window.create_file(filename.replace("plugins_", "imap_") + ".exe")
+		window.create_file(filename.replace("plugins_", "imap_") + ".dat")
+		window.goto_next_line()
+		window.create_file(filename.replace("plugins_", "kontrol_") + ".exe")
+		window.create_folder(filename.replace("plugins_", "outdated_"))
+		$WindowsManager.open_window(window)
+	elif filename.begins_with("outdated_"):
+		var window = $WindowsManager.create_window(filename)
 		$WindowsManager.open_window(window)
 	elif (filename.begins_with("astone ") || filename.begins_with("graveon ") || filename.begins_with("puntel ") || filename.begins_with("zvidia ")) && filename.count(" ") == 1:
 		var window = $WindowsManager.create_window(filename)
@@ -116,7 +128,10 @@ func open_file(filename: String) -> void:
 		var window = $WindowsManager.create_window(filename)
 		window.create_file("architectures.txt")
 		window.create_file("admin and sudo.txt")
+		window.goto_next_line()
+		window.create_file("credits.txt")
 		window.create_file("drivers.txt")
+		window.create_file("the game.txt")
 		$WindowsManager.open_window(window)
 	elif filename == "architectures.txt":
 		open_text_window(filename, "Unsure which architecture you are using?\nDon't worry!\n\nYou can easily check your current architecture\nby reading the ARCH.INI file in your system folder.")
@@ -124,20 +139,101 @@ func open_file(filename: String) -> void:
 		open_text_window(filename, "To run the game, you must be a normal user.\nThe game will not run if you are an administrator.\n\nUse SUDO-DISABLE.EXE in the BIN folder to\nrevoke your administrator privileges.")
 	elif filename == "drivers.txt":
 		open_text_window(filename, "This game requires up to date drivers.\nMake sure to install the ones you need\nfrom the TOOLS folder.\n\nCheck the PROC system folder for more\ndetails about your system.")
+	elif filename == "the game.txt":
+		open_text_window(filename, "Lost the game? Sorry about that!\nJust click on the files and folders.")
+	elif filename == "credits.txt":
+		open_text_window(filename, "- Game engine: Godot 4\n- Sounds: Interface Sounds by Kenney\n- Fonts: Kenney Mini Square and Pixolletta 8px")
 	elif filename == "system folder":
 		var window = $WindowsManager.create_window(filename)
 		window.create_folder("bin")
+		window.create_folder("home")
 		window.create_folder("proc")
-		window.create_folder("sys")
 		window.goto_next_line()
+		window.create_folder("sys")
 		window.create_file("arch.ini")
+		window.create_file("network.ini")
 		$WindowsManager.open_window(window)
 	elif filename == "arch.ini":
 		open_text_window(filename, "; this file has been deprecated\n; please check the SYS folder instead")
+	elif filename == "network.ini":
+		open_text_window(filename, "[network]\nmax_speed = 64 zbit/s\nip = 0x44.66.21\nresolver = openkloud")
 	elif filename == "bin":
 		var window = $WindowsManager.create_window(filename)
 		window.create_folder("admin")
 		window.create_folder("web")
+		window.create_file("man")
+		$WindowsManager.open_window(window)
+	elif filename == "home":
+		var window = $WindowsManager.create_window(filename)
+		window.create_folder("user")
+		window.create_folder("guest")
+		$WindowsManager.open_window(window)
+	elif filename == "man":
+		open_error_window(filename, "Man pages not installed.\nWho needs documentation.")
+	elif filename == "user":
+		var window = $WindowsManager.create_window(filename)
+		window.create_folder("desktop")
+		window.create_folder("documents")
+		$WindowsManager.open_window(window)
+	elif filename == "desktop":
+		var window = $WindowsManager.create_window(filename)
+		window.create_folder("system folder")
+		window.create_folder("game folder")
+		$WindowsManager.open_window(window)
+	elif filename == "documents":
+		var window = $WindowsManager.create_window(filename)
+		window.create_folder("downloads")
+		window.create_folder("work")
+		window.create_file("todo.txt")
+		$WindowsManager.open_window(window)
+	elif filename == "work":
+		var window = $WindowsManager.create_window(filename)
+		window.create_folder("january")
+		window.create_folder("february")
+		window.create_folder("march")
+		window.create_folder("april")
+		$WindowsManager.open_window(window)
+	elif filename == "january":
+		var window = $WindowsManager.create_window(filename)
+		$WindowsManager.open_window(window)
+	elif filename == "february":
+		var window = $WindowsManager.create_window(filename)
+		window.create_folder("secret homework")
+		$WindowsManager.open_window(window)
+	elif filename == "secret homework":
+		var window = $WindowsManager.create_window(filename)
+		window.create_folder("private information")
+		$WindowsManager.open_window(window)
+	elif filename == "private information":
+		var window = $WindowsManager.create_window(filename)
+		window.create_folder("do not open")
+		$WindowsManager.open_window(window)
+	elif filename == "do not open":
+		var window = $WindowsManager.create_window(filename)
+		window.create_file("do not read.txt")
+		$WindowsManager.open_window(window)
+	elif filename == "do not read.txt":
+		open_text_window(filename, "dQw4w9WgXcQ")
+	elif filename == "march":
+		var window = $WindowsManager.create_window(filename)
+		$WindowsManager.open_window(window)
+	elif filename == "april":
+		var window = $WindowsManager.create_window(filename)
+		window.create_folder("ldjam 57")
+		$WindowsManager.open_window(window)
+	elif filename == "ldjam 57":
+		var window = $WindowsManager.create_window(filename)
+		window.create_folder("game folder")
+		$WindowsManager.open_window(window)
+	elif filename == "downloads":
+		var window = $WindowsManager.create_window(filename)
+		window.create_file("cat pictures.zip")
+		window.create_file("game.zip")
+		$WindowsManager.open_window(window)
+	elif filename == "todo.txt":
+		open_text_window(filename, "- Unzip the game (done!)\n- Play the game (in progress)\n- Uninstall the game (soon)");
+	elif filename == "guest":
+		var window = $WindowsManager.create_window(filename)
 		$WindowsManager.open_window(window)
 	elif filename == "proc":
 		var window = $WindowsManager.create_window(filename)
@@ -158,19 +254,65 @@ func open_file(filename: String) -> void:
 			is_sudo = false
 			open_success_window(filename, "You are now a normal user.");
 	elif filename == "sys":
+		if is_sudo:
+			var window = $WindowsManager.create_window(filename)
+			window.create_folder("kernel")
+			window.create_folder("legacy")
+			window.create_folder("power")
+			$WindowsManager.open_window(window)
+		else:
+			open_error_window(filename, "error: permission denied.\nyou are not an administrator.")
+	elif filename == "legacy":
 		var window = $WindowsManager.create_window(filename)
 		if is_sudo:
+			window.create_file("arch.ini.old")
 			window.create_file("current-arch.ini")
 		else:
 			window.display_error("error: permission denied.\nyou are not an administrator.")
 		$WindowsManager.open_window(window)
 	elif filename == "current-arch.ini":
-		open_text_window(filename, "[arch]\ncurrent_arch = arch_x38_v5")
+		if is_sudo:
+			open_text_window(filename, "[arch]\ncurrent_arch = arch_x38_v5")
+		else:
+			open_error_window(filename, "error: permission denied.\nyou are not an administrator.")
+	elif filename == "arch.ini.old":
+		if is_sudo:
+			open_text_window(filename, "[arch]\ncurrent_arch = arch_x38_v4")
+		else:
+			open_error_window(filename, "error: permission denied.\nyou are not an administrator.")
 	elif filename == "cpu":
 		var window = $WindowsManager.create_window(filename)
 		window.create_file("cpu-info.ini")
 		window.create_file("cpu-data")
 		$WindowsManager.open_window(window)
+	elif filename == "kernel":
+		if is_sudo:
+			var window = $WindowsManager.create_window(filename)
+			window.create_file("latest-arch.ini")
+			window.create_file("latest-arch.log")
+			$WindowsManager.open_window(window)
+		else:
+			open_error_window(filename, "error: permission denied.\nyou are not an administrator.")
+	elif filename == "latest-arch.ini":
+		if is_sudo:
+			open_text_window(filename, "[arch]\ndownloaded_arch = arch_x48_v3\nstatus_file = latest-arch.log")
+		else:
+			open_error_window(filename, "error: permission denied.\nyou are not an administrator.")
+	elif filename == "latest-arch.log":
+		if is_sudo:
+			open_text_window(filename, "- Downloaded arch_x48_v3 successfully.\n- Error: arch_x48_v3 not installed,\n  incompatible with current hardware.\n- Check LEGACY for the current arch.")
+		else:
+			open_error_window(filename, "error: permission denied.\nyou are not an administrator.")
+	elif filename == "power":
+		if is_sudo:
+			var window = $WindowsManager.create_window(filename)
+			window.create_file("battery.dat")
+			window.create_file("display.dat")
+			window.create_file("keyboard.dat")
+			window.create_file("mouse.dat")
+			$WindowsManager.open_window(window)
+		else:
+			open_error_window(filename, "error: permission denied.\nyou are not an administrator.")
 	elif filename == "gpu":
 		var window = $WindowsManager.create_window(filename)
 		window.create_file("gpu-info.ini")
