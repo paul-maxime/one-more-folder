@@ -6,6 +6,9 @@ var floating_position: Vector2
 var is_destroying = false
 
 func _ready() -> void:
+	var is_folder = randi() % 2 == 1
+	if is_folder:
+		texture = load("res://Assets/folder.png");
 	var from_left_side: bool = randi() % 2 == 1
 	speed = randf_range(100.0, 250.0)
 	position.y = randi_range(16, int(get_viewport_rect().end.y) - 16)

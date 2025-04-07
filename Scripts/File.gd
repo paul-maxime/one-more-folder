@@ -13,6 +13,8 @@ func _on_gui_input(event: InputEvent) -> void:
 			if event.double_click:
 				$"/root/MainScene".open_file($VBoxContainer/Filename.text)
 			elif event.pressed:
+				if get_parent() is Node2D:
+					$"/root/MainScene/WindowsManager".focus_window(get_parent())
 				$"/root/MainScene/WindowsManager".select_file(self)
 
 func was_selected() -> void:

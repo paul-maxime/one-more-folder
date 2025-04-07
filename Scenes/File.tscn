@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dfsjuee6nxsra" path="res://Scripts/File.gd" id="1_wvf65"]
 [ext_resource type="Texture2D" uid="uid://dhnygvqgx1k7q" path="res://Assets/file.png" id="2_bb4b2"]
-[ext_resource type="FontFile" uid="uid://dy2pqiwq5k0rt" path="res://Assets/Kenney Mini Square.ttf" id="3_omfu5"]
+[ext_resource type="FontFile" uid="uid://dy2pqiwq5k0rt" path="res://Assets/Fonts/Kenney Mini Square.ttf" id="3_omfu5"]
 
 [node name="File" type="Node2D"]
 script = ExtResource("1_wvf65")

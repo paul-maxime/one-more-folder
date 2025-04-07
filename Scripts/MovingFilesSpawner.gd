@@ -8,5 +8,5 @@ func _process(delta: float) -> void:
     if !visible: return
     next_spawn_in -= delta
     if next_spawn_in < 0:
-        next_spawn_in += 1.0
+        next_spawn_in += randf_range(0.5, 1.0)
         add_child(moving_file_scene.instantiate())

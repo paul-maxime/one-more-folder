@@ -30,8 +30,9 @@ func _process(delta: float) -> void:
 func congratz() -> void:
 	is_loading = false
 	is_playing = true
-	$CanvasLayer/CenterContainer.mouse_default_cursor_shape = Input.CURSOR_CROSS
+	$VictorySoundPlayer.play()
 	$MovingFilesSpawner.show()
+	$CanvasLayer/CenterContainer.mouse_default_cursor_shape = Input.CURSOR_CROSS
 	$CanvasLayer/CenterContainer/VBoxContainer/LoadingProgress.hide()
 	$CanvasLayer/CenterContainer/VBoxContainer/LoadingLabel.text = "Congratulations!\nYou managed to start the game."
 

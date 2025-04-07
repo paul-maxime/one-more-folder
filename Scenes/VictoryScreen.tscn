@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://2fmi0i3pgv45"]
+[gd_scene load_steps=7 format=3 uid="uid://2fmi0i3pgv45"]
 
 [ext_resource type="Script" uid="uid://clps2cmvd3bml" path="res://Scripts/VictoryScreen.gd" id="1_2n4xq"]
 [ext_resource type="Script" uid="uid://bcvjougs76l4c" path="res://Scripts/MovingFilesSpawner.gd" id="2_8kq2x"]
-[ext_resource type="FontFile" uid="uid://dy2pqiwq5k0rt" path="res://Assets/Kenney Mini Square.ttf" id="2_rc3hl"]
+[ext_resource type="FontFile" uid="uid://dy2pqiwq5k0rt" path="res://Assets/Fonts/Kenney Mini Square.ttf" id="2_rc3hl"]
+[ext_resource type="AudioStream" uid="uid://bgr3dep7nnkl5" path="res://Assets/Audio/confirmation_002.ogg" id="4_fjces"]
 [ext_resource type="AudioStream" uid="uid://wqqgbeujyee1" path="res://Assets/Audio/close_004.ogg" id="4_j7jqh"]
 [ext_resource type="AudioStream" uid="uid://duws1sg2dpvdn" path="res://Assets/Audio/error_007.ogg" id="5_fjces"]
 
@@ -46,6 +47,10 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_rc3hl")
 text = "#_________"
 horizontal_alignment = 1
+
+[node name="VictorySoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_fjces")
+volume_db = -5.0
 
 [node name="ShotSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_j7jqh")

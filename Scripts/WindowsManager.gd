@@ -25,7 +25,11 @@ func create_window(title: String) -> Node2D:
 	return window
 
 func open_window(window: Node2D) -> void:
-	$"../OpenSoundPlayer".play()
+	if window.is_error:
+		$"../ErrorSoundPlayer".play()
+	else:
+		$"../OpenSoundPlayer".play()
+	window.finalize_window()
 	window.position = floor(get_viewport().get_mouse_position() - window.size_in_pixels / 2)
 	window.clamp_position()
 	windows.push_front(window)
