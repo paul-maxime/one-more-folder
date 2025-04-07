@@ -14,7 +14,7 @@ var next_file_new_line: bool = false
 var minimum_window_size: Vector2i = Vector2i.ZERO
 
 func _ready() -> void:
-	windows_manager = $"/root/MainScene/WindowsManager";
+	windows_manager = $"/root/MainScene/WindowsManager"
 
 func create_file(filename: String) -> void:
 	var file: Node2D = file_scene.instantiate()
